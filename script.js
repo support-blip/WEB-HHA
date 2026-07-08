@@ -16,6 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroVideo = document.getElementById('hero-video');
 
   if (heroWrapper && heroHH && heroMessage && heroVideo) {
+    heroVideo.style.transformOrigin = 'left center';
+
+    let heroVideoBaseLeft = 0;
+    function measureHeroVideoBaseLeft() {
+      const prevTransform = heroVideo.style.transform;
+      const prevMargin = heroVideo.style.marginLeft;
+      heroVideo.style.transform = 'none';
+      heroVideo.style.marginLeft = '0px';
+      heroVideoBaseLeft = heroVideo.getBoundingClientRect().left;
+      heroVideo.style.transform = prevTransform;
+      heroVideo.style.marginLeft = prevMargin;
+    }
+
     function updateHero() {
       const rect = heroWrapper.getBoundingClientRect();
       const total = heroWrapper.offsetHeight - window.innerHeight;
@@ -40,13 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       heroVideo.style.transform = `scale(${scaleX}, ${scaleY})`;
       heroVideo.style.borderRadius = radius + 'px';
-
-      const rectVideo = heroVideo.getBoundingClientRect();
-      heroVideo.style.transformOrigin = 'left center';
-      heroVideo.style.marginLeft = lerp(0, -rectVideo.left, growProgress) + 'px';
+      heroVideo.style.marginLeft = lerp(0, -heroVideoBaseLeft, growProgress) + 'px';
+    }
+    function handleResize() {
+      measureHeroVideoBaseLeft();
+      updateHero();
     }
     window.addEventListener('scroll', updateHero, { passive: true });
-    window.addEventListener('resize', updateHero);
+    window.addEventListener('resize', handleResize);
+    measureHeroVideoBaseLeft();
     updateHero();
   }
 
@@ -72,18 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- TEAM DIRECTORY ---------- */
   const teamMembers = [
-    { name: 'Hector Hernandez', role: 'Abogado Fundador', color: '#2538A5' },
-    { name: 'Eduardo Alvares', role: 'Abogado de Inmigración', color: '#08254A' },
-    { name: 'H. Jose Hernandez', role: 'Gerente de Relaciones al Cliente', color: '#1c3a5e' },
-    { name: 'Eli Garcia', role: 'Paralegal Bienes Raíces', color: '#2f4a3a' },
-    { name: 'Dailyn Gonzalez', role: 'Paralegal de Inmigración', color: '#4a4032' },
-    { name: 'Horaline Disla', role: 'Paralegal de Inmigración', color: '#5a3030' },
-    { name: 'Rocio Izquierdo', role: 'Paralegal de Inmigración', color: '#2538A5' },
-    { name: 'Claudia Ricardo', role: 'Servicio al Cliente', color: '#08254A' },
-    { name: 'Adriana Hernandez', role: 'Servicio al Cliente', color: '#1c3a5e' },
-    { name: 'Marlene Ramirez', role: 'Lesiones Personales', color: '#2f4a3a' },
-    { name: 'Alexandra Colon', role: 'Asistente Legal', color: '#4a4032' },
-    { name: 'Jorge Pino', role: 'Contador', color: '#5a3030' },
+    { name: 'Hector Hernandez', role: 'Abogado Fundador', color: '#2538A5', photo: 'img/hectorHernandez.jpg' },
+    { name: 'Eduardo Alvares', role: 'Abogado de Inmigración', color: '#08254A', photo: 'img/eduardoAlvarez.jpg' },
+    { name: 'H. Jose Hernandez', role: 'Gerente de Relaciones al Cliente', color: '#1c3a5e', photo: 'img/joseHernandez.jpg' },
+    { name: 'Eli Garcia', role: 'Paralegal Bienes Raíces', color: '#2f4a3a', photo: 'img/eliGarcia.jpg' },
+    { name: 'Dailyn Gonzalez', role: 'Paralegal de Inmigración', color: '#4a4032', photo: 'img/dailynGonzalez.jpg' },
+    { name: 'Horaline Disla', role: 'Paralegal de Inmigración', color: '#5a3030', photo: 'img/harolineDisla.jpg' },
+    { name: 'Rocio Izquierdo', role: 'Paralegal de Inmigración', color: '#2538A5', photo: 'img/rocioIzquierdo.jpg' },
+    { name: 'Claudia Ricardo', role: 'Servicio al Cliente', color: '#08254A', photo: 'img/claudiaRicardo.jpg' },
+    { name: 'Adriana Hernandez', role: 'Servicio al Cliente', color: '#1c3a5e', photo: 'img/adrianHernandez.jpg' },
+    { name: 'Marlene Ramirez', role: 'Lesiones Personales', color: '#2f4a3a', photo: 'img/marleneRamirez.jpg' },
+    { name: 'Alexandra Colon', role: 'Asistente Legal', color: '#4a4032', photo: 'img/alexandraColon.jpg' },
+    { name: 'Jorge Pino', role: 'Contador', color: '#5a3030', photo: 'img/jorgePino.jpg' },
   ];
 
   const gallery = document.getElementById('team-gallery');
@@ -98,18 +113,42 @@ document.addEventListener('DOMContentLoaded', () => {
       return name.split(' ').filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
     }
 
+    function photoStyle(member) {
+      if (member.photo) {
+        return `background:url('${member.photo}') center/cover no-repeat;`;
+      }
+      return `background:linear-gradient(160deg, ${member.color}, #0a1220); display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.85);font-family:'Montserrat',sans-serif;font-weight:700;font-size:32px;`;
+    }
+
     teamMembers.forEach((member, idx) => {
       const el = document.createElement('div');
       el.className = 'team-member';
       if (idx === 0) el.classList.add('selected');
       el.innerHTML = `
-        <div class="team-photo" style="background:linear-gradient(160deg, ${member.color}, #0a1220); display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.85);font-family:'Montserrat',sans-serif;font-weight:700;font-size:32px;">${initials(member.name)}</div>
+        <div class="team-photo" style="${photoStyle(member)}">${member.photo ? '' : initials(member.name)}</div>
         <div class="team-member-name">${member.name}</div>
         <div class="team-member-role">${member.role}</div>
       `;
       el.addEventListener('click', () => selectMember(member, el));
       gallery.appendChild(el);
     });
+
+    function applyProfilePhoto(member) {
+      if (member.photo) {
+        profilePhoto.style.background = `url('${member.photo}') center top / cover no-repeat`;
+        profilePhoto.textContent = '';
+      } else {
+        profilePhoto.style.background = `linear-gradient(160deg, ${member.color}, #0a1220)`;
+        profilePhoto.textContent = initials(member.name);
+      }
+      profilePhoto.style.display = 'flex';
+      profilePhoto.style.alignItems = 'center';
+      profilePhoto.style.justifyContent = 'center';
+      profilePhoto.style.color = 'rgba(255,255,255,0.9)';
+      profilePhoto.style.fontFamily = "'Montserrat', sans-serif";
+      profilePhoto.style.fontWeight = '800';
+      profilePhoto.style.fontSize = '64px';
+    }
 
     function selectMember(member, el) {
       gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('selected'));
@@ -118,15 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
       profilePhoto.style.opacity = 0;
       profileName.style.opacity = 0;
       setTimeout(() => {
-        profilePhoto.style.background = `linear-gradient(160deg, ${member.color}, #0a1220)`;
-        profilePhoto.style.display = 'flex';
-        profilePhoto.style.alignItems = 'center';
-        profilePhoto.style.justifyContent = 'center';
-        profilePhoto.style.color = 'rgba(255,255,255,0.9)';
-        profilePhoto.style.fontFamily = "'Montserrat', sans-serif";
-        profilePhoto.style.fontWeight = '800';
-        profilePhoto.style.fontSize = '64px';
-        profilePhoto.textContent = initials(member.name);
+        applyProfilePhoto(member);
         profileName.textContent = member.name.toUpperCase();
         profileRole.textContent = member.role;
         profilePhoto.style.opacity = 1;
@@ -136,15 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (teamMembers.length) {
       const first = teamMembers[0];
-      profilePhoto.style.background = `linear-gradient(160deg, ${first.color}, #0a1220)`;
-      profilePhoto.style.display = 'flex';
-      profilePhoto.style.alignItems = 'center';
-      profilePhoto.style.justifyContent = 'center';
-      profilePhoto.style.color = 'rgba(255,255,255,0.9)';
-      profilePhoto.style.fontFamily = "'Montserrat', sans-serif";
-      profilePhoto.style.fontWeight = '800';
-      profilePhoto.style.fontSize = '64px';
-      profilePhoto.textContent = initials(first.name);
+      applyProfilePhoto(first);
       profileName.textContent = first.name.toUpperCase();
       profileRole.textContent = first.role;
     }

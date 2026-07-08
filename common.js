@@ -6,13 +6,54 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- PRELOADER ---------- */
+  /* ---------- PRELOADER: TELÓN BLANCO ENTRE PÁGINAS ---------- */
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
-      setTimeout(() => preloader.classList.add('hidden'), 300);
+    const CURTAIN_DURATION = 650; // ms — debe coincidir con la transición en CSS
+
+    function setCurtain(transform, animate) {
+      if (!animate) preloader.classList.add('no-transition');
+      preloader.style.transform = transform;
+      if (!animate) {
+        void preloader.offsetHeight; // fuerza reflow para que el próximo cambio sí anime
+        preloader.classList.remove('no-transition');
+      }
+    }
+
+    function revealCurrentPage() {
+      setCurtain('translateY(0)', false); // punto de partida: cubriendo, sin animar
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setCurtain('translateY(100%)', true); // el telón sigue bajando y sale, revelando el contenido
+          setTimeout(() => {
+            setCurtain('translateY(-100%)', false); // se reposiciona arriba (oculto) para la próxima transición
+          }, CURTAIN_DURATION + 50);
+        });
+      });
+    }
+
+    if (document.readyState === 'complete') {
+      revealCurrentPage();
+    } else {
+      window.addEventListener('load', revealCurrentPage);
+    }
+    setTimeout(revealCurrentPage, 1600); // red de seguridad
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      if (link.hasAttribute('download') || link.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+      let url;
+      try { url = new URL(href, window.location.href); } catch (err) { return; }
+      if (url.origin !== window.location.origin) return; // enlace externo: navegación normal
+      if (url.pathname === window.location.pathname && url.search === window.location.search) return; // ancla en la misma página
+
+      e.preventDefault();
+      setCurtain('translateY(0)', true); // el telón baja desde arriba cubriendo la pantalla
+      setTimeout(() => { window.location.href = url.href; }, CURTAIN_DURATION);
     });
-    setTimeout(() => preloader.classList.add('hidden'), 1500);
   }
 
   /* ---------- HEADER SCROLL STATE ---------- */
