@@ -1,0 +1,10 @@
+<svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+  <g font-family="Montserrat, sans-serif">
+    <!-- HH monogram simplified -->
+    <path d="M10 8 H20 V26 H30 V8 H40 V52 H30 V34 H20 V52 H10 Z" fill="#2538A5"/>
+    <path d="M26 8 H36 V26 H46 V8 H56 V52 H46 V34 H36 V52 H26 Z" fill="#D9A441" opacity="0.95"/>
+  </g>
+  <text x="72" y="24" font-family="Montserrat, sans-serif" font-weight="700" font-size="13" letter-spacing="1.5" fill="#FFFFFF">HECTOR</text>
+  <text x="72" y="38" font-family="Montserrat, sans-serif" font-weight="700" font-size="13" letter-spacing="1.5" fill="#FFFFFF">HERNANDEZ &amp;</text>
+  <text x="72" y="52" font-family="Montserrat, sans-serif" font-weight="700" font-size="13" letter-spacing="1.5" fill="#FFFFFF">ASSOCIATES, P.A.</text>
+</svg>

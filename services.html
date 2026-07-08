@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Servicios | Hector Hernandez & Associates, P.A.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="preloader"><div class="preloader-hh">HH</div></div>
+
+<header id="site-header">
+  <div class="header-inner">
+    <div class="header-logo"><img src="LOGO.png" alt="Hector Hernandez & Associates, P.A." class="logo-full"></div>
+    <nav class="header-menu">
+      <a href="index.html">Inicio</a>
+      <a href="about.html">About Us</a>
+      <div class="menu-dropdown">
+        <a href="services.html?service=inmigracion" id="nav-services-link">Servicios <span class="caret">▾</span></a>
+        <div class="dropdown-panel">
+          <a href="services.html?service=inmigracion">Inmigración</a>
+          <a href="services.html?service=bancarrota">Bancarrota</a>
+          <a href="services.html?service=lesiones-personales">Lesiones Personales</a>
+          <a href="services.html?service=bienes-raices">Bienes Raíces</a>
+        </div>
+      </div>
+      <a href="index.html#team">Team</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <a href="contact.html" class="btn-contact-us">Contact Us</a>
+    <button id="mobile-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+  <div id="mobile-menu">
+    <a href="index.html">Inicio</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html?service=inmigracion">Servicios</a>
+    <a href="index.html#team">Team</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html" class="btn-contact-us">Contact Us</a>
+  </div>
+</header>
+
+<!-- ============ SERVICE HERO (3 paneles) ============ -->
+<section class="service-hero">
+  <div class="service-hero-top">
+    <h1 class="service-hero-title" id="svc-hero-title">Servicio</h1>
+  </div>
+  <div class="service-hero-bottom">
+    <div class="service-panel-side left"></div>
+    <div class="service-panel-center">
+      <p class="service-hero-message" id="svc-hero-message">Mensaje principal del servicio.</p>
+    </div>
+    <div class="service-panel-side right"></div>
+  </div>
+</section>
+
+<!-- ============ SECCIÓN 02: MENSAJE + ÁREAS DE PRÁCTICA ============ -->
+<section class="service-section2">
+  <div class="service-section2-grid">
+    <div class="service-section2-left reveal-fade-up">
+      <h2 class="service-section2-title" id="svc-section-title">Título</h2>
+      <div class="deco-line-gold"></div>
+      <p class="service-section2-text" id="svc-section-text">Texto descriptivo.</p>
+    </div>
+    <div class="service-section2-right" id="svc-practice-list">
+      <!-- numbered items injected -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO INFORMATIVO ============ -->
+<section class="service-video-section">
+  <div class="service-video-container" id="svc-video-container">
+    <div class="service-video-thumb">
+      <div class="play-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="#071A2D"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENIDO ÚNICO POR SERVICIO ============ -->
+<div id="svc-unique-content"><!-- injected by services.js --></div>
+
+<!-- ============ FAQ ACCORDION ============ -->
+<section class="faq-section">
+  <div class="faq-grid">
+    <div class="faq-left">
+      <h2 class="faq-title">Preguntas<br>Frecuentes</h2>
+      <div class="deco-line-orange"></div>
+      <div class="faq-list" id="svc-faq-list"><!-- injected --></div>
+    </div>
+    <div class="faq-right">
+      <div class="faq-image-placeholder">Fotografía del equipo legal</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT US ============ -->
+<section id="contact" class="contact-section">
+  <div class="contact-header">
+    <div class="contact-eyebrow-row">
+      <span class="deco-line-h short"></span>
+      <span class="section-eyebrow gold">CONTACT US</span>
+      <span class="deco-line-h short"></span>
+    </div>
+    <h2 class="contact-title">Hablemos de <span class="italic-blue">tu caso</span></h2>
+    <div class="deco-line" style="width:60px;"></div>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-offices reveal-left">
+      <div class="office-block">
+        <h3 class="office-title">MIAMI OFFICE</h3>
+        <p class="office-info">(305) 614-1690<br>7480 SW 40th Street<br>Suite 450<br>Miami, FL 33155</p>
+      </div>
+      <div class="office-separator"></div>
+      <div class="office-block">
+        <h3 class="office-title">WEST PALM BEACH OFFICE</h3>
+        <p class="office-info">(561) 566-6860<br>8461 Lake Worth Road<br>West Palm Beach, FL 33467<br>(The Nexus)</p>
+      </div>
+    </div>
+    <form class="contact-form reveal-right" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-field"><label>Nombres *</label><input type="text" placeholder="Nombres" required></div>
+        <div class="form-field"><label>Correo Electrónico *</label><input type="email" placeholder="Correo Electrónico" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Teléfono *</label><input type="tel" placeholder="Teléfono" required></div>
+        <div class="form-field">
+          <label>Seleccione un servicio *</label>
+          <select id="svc-select" required>
+            <option value="" disabled selected>Seleccione un servicio</option>
+            <option>Inmigración</option><option>Bancarrota</option><option>Lesiones Personales</option><option>Bienes Raíces</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row"><div class="form-field full"><label>Mensaje *</label><textarea placeholder="Mensaje" rows="3" required></textarea></div></div>
+      <label class="checkbox-row"><input type="checkbox"><span>Confirmo que deseo recibir contenidos de esta empresa utilizando la información de contacto que facilito.</span></label>
+      <button type="submit" class="btn-schedule">Agenda tu cita <span class="arrow">→</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="site-footer" class="reveal-fade-up">
+  <div class="footer-inner">
+    <div class="footer-col footer-brand">
+      <div class="footer-hh"><span class="hh-h1">H</span><span class="hh-h2">H</span></div>
+      <p class="footer-tagline">Tu sueño americano es<br>nuestra misión legal.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/HectorHernandezAndAssociates" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="https://www.instagram.com/hha_law/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.4.5.6.2 1 .5 1.5 1 .5.5.7.9 1 1.5.2.4.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.4-.2.6-.5 1-1 1.5-.5.5-.9.7-1.5 1-.4.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.4-.5-.6-.2-1-.5-1.5-1-.5-.5-.7-.9-1-1.5-.2-.4-.4-1.2-.5-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.4.2-.6.5-1 1-1.5.5-.5.9-.7 1.5-1 .4-.2 1.2-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.8.1-1 .1-1.5.2-1.9.4-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.9-.4 1.9-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1 .2 1.5.4 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.9.3 1.9.4 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1-.1 1.5-.2 1.9-.4.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.9.4-1.9.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1-.2-1.5-.4-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.9-.3-1.9-.4-1.3-.1-1.7-.1-4.8-.1zm0 3.1a5.9 5.9 0 1 1 0 11.8 5.9 5.9 0 0 1 0-11.8zm0 1.8a4.1 4.1 0 1 0 0 8.2 4.1 4.1 0 0 0 0-8.2zm6.1-2a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0z"/></svg></a>
+        <a href="https://www.linkedin.com/company/hhalawfirm/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z"/></svg></a>
+        <a href="https://www.youtube.com/@hectorhernandezassociates/shorts" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M23 12s0-3.4-.4-5a2.9 2.9 0 0 0-2-2C18.9 4.5 12 4.5 12 4.5s-6.9 0-8.6.5a2.9 2.9 0 0 0-2 2C1 8.6 1 12 1 12s0 3.4.4 5a2.9 2.9 0 0 0 2 2c1.7.5 8.6.5 8.6.5s6.9 0 8.6-.5a2.9 2.9 0 0 0 2-2c.4-1.6.4-5 .4-5zM9.8 15.5v-7l6 3.5-6 3.5z"/></svg></a>
+        <a href="https://www.tiktok.com/@hhalawfirm?_r=1&_t=ZP-94kEILWHU1H" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.6 2h-3.3v13.6a2.7 2.7 0 1 1-2.7-2.7c.2 0 .5 0 .7.1v-3.3a6 6 0 1 0 5.3 6V8.4a7.7 7.7 0 0 0 4.4 1.4V6.5a4.4 4.4 0 0 1-4.4-4.4z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4 class="footer-col-title">MENÚ</h4><a href="index.html">Inicio</a><a href="about.html">Sobre Nosotros</a><a href="services.html?service=inmigracion">Servicios</a><a href="contact.html">Contáctanos</a></div>
+    <div class="footer-col"><h4 class="footer-col-title">SERVICIOS</h4><a href="services.html?service=inmigracion">Inmigración</a><a href="services.html?service=bancarrota">Bancarrota</a><a href="services.html?service=lesiones-personales">Lesiones Personales</a><a href="services.html?service=bienes-raices">Bienes Raíces</a></div>
+    <div class="footer-col"><h4 class="footer-col-title">OFICINA MIAMI</h4><p class="footer-office-info">(+1) 305-614-1690<br>7480 SW 40th Street<br>Suite 450<br>Miami, FL 33155</p></div>
+    <div class="footer-col"><h4 class="footer-col-title">OFICINA WEST PALM BEACH</h4><p class="footer-office-info">(+1) 561-566-6860<br>8461 Lake Worth Road<br>West Palm Beach, FL<br>33467 (The Nexus)</p></div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-legal">
+    <span>Copyright © 2026 Hector Hernandez &amp; Associates, P.A.</span>
+    <span class="footer-legal-right">Todos los derechos reservados | <a href="#">Términos y condiciones</a> | <a href="#">Brito Marketing</a></span>
+  </div>
+</footer>
+
+<script src="servicesData.js"></script>
+<script src="common.js"></script>
+<script src="services.js"></script>
+</body>
+</html>
