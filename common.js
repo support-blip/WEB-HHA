@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     '.reveal-right',
     '.reveal-scalex',
     '.about-card',
-    '.cube-wrap',
     '.faq-card',
     '.practice-item',
     '.service-card',

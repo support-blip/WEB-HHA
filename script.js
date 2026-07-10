@@ -65,6 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHero();
   }
 
+  /* ---------- SERVICE CUBES: ROTACIÓN 3D CON GSAP + SCROLLTRIGGER ---------- */
+  const cubeSection = document.getElementById('services');
+  if (cubeSection && window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    const cubeWraps = cubeSection.querySelectorAll('.wrp');
+    gsap.to(cubeWraps, {
+      rotationX: 270,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: cubeSection,
+        start: 'top top',
+        end: '+=3000',
+        scrub: 0.5,
+        pin: true,
+        anticipatePin: 1
+      }
+    });
+  }
+
   /* ---------- TEAM INTRO: ZOOM TEXT ---------- */
   const teamIntroWrapper = document.getElementById('team-intro-wrapper');
   const teamGiant = document.getElementById('team-giant');
