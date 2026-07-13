@@ -579,7 +579,7 @@ ul { list-style: none; }
   width: 100%;
   max-width: 900px;
   height: 380px;
-  perspective: 2000px;
+  perspective: 3200px;
   overflow: hidden;
 }
 .services-cube {
@@ -614,9 +614,14 @@ ul { list-style: none; }
 
 .cube-face-text {
   position: relative;
-  width: 60%;
+  width: 50%;
   background: var(--white);
-  padding: 32px;
+  padding: 48px;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+.services-cube-face:hover .cube-face-text {
+  background: linear-gradient(120deg, var(--gold-dark), var(--gold), var(--gold-light));
 }
 .cube-num {
   display: block;
@@ -636,22 +641,23 @@ ul { list-style: none; }
 }
 .cube-more {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  padding-left: 32px;
-  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+  left: 48px;
+  bottom: 40px;
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 15px;
   color: var(--ink);
   letter-spacing: 0.5px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.services-cube-face:hover .cube-more {
+  opacity: 1;
+  transform: translateY(0);
 }
 .cube-face-photo {
-  width: 40%;
+  width: 50%;
   background-size: cover;
   background-position: center;
 }
@@ -661,10 +667,11 @@ ul { list-style: none; }
 .img-realestate { background: linear-gradient(160deg, rgba(47,74,58,0.55) 0%, rgba(26,44,34,0.65) 60%, rgba(13,23,18,0.8) 100%), url("img/bienes-raices.jpg") center/cover no-repeat; }
 
 @media (max-width: 800px) {
-  .services-cube-stage { height: 480px; }
+  .services-cube-stage { height: 480px; perspective: 3800px; }
   .services-cube-face { flex-direction: column; }
-  .cube-face-text { width: 100%; height: 60%; }
-  .cube-face-photo { width: 100%; height: 40%; }
+  .cube-face-text { width: 100%; height: 50%; padding: 32px; }
+  .cube-face-photo { width: 100%; height: 50%; }
+  .cube-more { left: 32px; bottom: 24px; }
   .services-cube-face:nth-child(1) { transform: translateZ(240px); }
   .services-cube-face:nth-child(2) { transform: rotateX(-90deg) translateZ(240px); }
   .services-cube-face:nth-child(3) { transform: rotateX(180deg) translateZ(240px); }
