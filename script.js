@@ -65,41 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHero();
   }
 
-  /* ---------- SERVICE CUBES: ROTACIÓN 3D CON GSAP + SCROLLTRIGGER ---------- */
-  const cubeSection = document.getElementById('services');
-  if (cubeSection && window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    const cubeWraps = cubeSection.querySelectorAll('.wrp');
-    gsap.to(cubeWraps, {
-      rotationX: 270,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: cubeSection,
-        start: 'top top',
-        end: '+=3000',
-        scrub: 0.5,
-        pin: true,
-        anticipatePin: 1
-      }
-    });
-
-    // Las 4 fotos del cubo son pesadas: si terminan de cargar después de
-    // que ScrollTrigger calculó las posiciones de pin, el alto real de la
-    // página cambia y el pin queda desalineado. Esperamos explícitamente
-    // a que cada imagen cargue (no solo el evento 'load' genérico) antes
-    // de forzar el recálculo.
-    const cubeImages = cubeSection.querySelectorAll('img');
-    const imagesReady = Promise.all([...cubeImages].map(img => {
-      if (img.complete) return Promise.resolve();
-      return new Promise(resolve => {
-        img.addEventListener('load', resolve, { once: true });
-        img.addEventListener('error', resolve, { once: true });
-      });
-    }));
-    imagesReady.then(() => ScrollTrigger.refresh());
-    window.addEventListener('load', () => ScrollTrigger.refresh());
-  }
-
   /* ---------- TEAM INTRO: ZOOM TEXT ---------- */
   const teamIntroWrapper = document.getElementById('team-intro-wrapper');
   const teamGiant = document.getElementById('team-giant');
