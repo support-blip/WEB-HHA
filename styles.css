@@ -2004,3 +2004,92 @@ ul { list-style: none; }
   .faq-grid { grid-template-columns: 1fr; }
   .faq-right { order: 2; min-height: 260px; }
 }
+
+/* ============================================================
+   PRUEBA CUBOS — demo de cubo 3D con CSS puro (sin JS)
+   ============================================================ */
+.prueba-cubos-section {
+  background: #f4f4f4;
+  padding: 120px 40px;
+  text-align: center;
+}
+.prueba-cubos-title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--ink);
+  margin-bottom: 70px;
+}
+.prueba-cubos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px;
+}
+.prueba-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+.prueba-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+#contenedor {
+  width: 120px;
+  height: 120px;
+  perspective: 1000px;
+}
+
+.cubo {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.cubo div {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #222;
+  opacity: 0.9;
+}
+.cubo .cara1 { background: #e63946; transform: translateZ(60px); }
+.cubo .cara2 { background: #2a9d8f; transform: rotateY(90deg) translateZ(60px); }
+.cubo .cara3 { background: #457b9d; transform: rotateY(90deg) rotateX(90deg) translateZ(60px); }
+.cubo .cara4 { background: #f4a261; transform: rotateY(180deg) rotateZ(90deg) translateZ(60px); }
+.cubo .cara5 { background: #8d99ae; transform: rotateY(-90deg) rotateZ(90deg) translateZ(60px); }
+.cubo .cara6 { background: #ffd166; transform: rotateX(-90deg) translateZ(60px); }
+
+@keyframes rotacubo {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(360deg); }
+}
+.animacubo {
+  animation-name: rotacubo;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 12s;
+  transform-style: preserve-3d;
+  transform-origin: 60px 60px 0;
+}
+
+@keyframes rotacubo3 {
+  0% { transform: translateZ(0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateZ(-800px) rotateX(180deg) rotateY(180deg); }
+  100% { transform: translateZ(0) rotateX(360deg) rotateY(360deg); }
+}
+.animacubo3 {
+  animation-name: rotacubo3;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 12s;
+  transform-style: preserve-3d;
+  transform-origin: 60px 60px 0;
+}
+
+@media (max-width: 900px) {
+  .prueba-cubos-grid { gap: 60px; }
+}
