@@ -786,7 +786,7 @@ ul { list-style: none; }
   transition: transform 0.3s ease, filter 0.3s ease;
   margin-bottom: 14px;
 }
-.team-member:hover .team-photo { transform: scale(1.03); }
+.team-member:hover .team-photo { transform: scale(1.03); filter: grayscale(0); }
 .team-member.selected .team-photo { filter: grayscale(0); }
 .team-member-name {
   font-family: var(--font-sans);
@@ -815,8 +815,8 @@ ul { list-style: none; }
 }
 .profile-photo {
   width: 100%;
-  max-width: 550px;
-  height: 340px;
+  max-width: 420px;
+  height: 560px;
   border-radius: 12px;
   background-size: cover;
   background-position: center;
