@@ -592,10 +592,10 @@ ul { list-style: none; }
   justify-content: center;
 }
 .services-cube-stage {
-  width: 415px;
+  width: 830px;        /* 2 paneles de 415px */
   max-width: 92vw;
   height: 445px;
-  perspective: 3200px;
+  perspective: 4200px;
   overflow: hidden;
 }
 .services-cube {
@@ -630,7 +630,7 @@ ul { list-style: none; }
 
 .cube-face-text {
   position: relative;
-  width: 50%;
+  flex: 1 1 415px;
   background: var(--white);
   padding: 24px;
   display: flex;
@@ -684,7 +684,7 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 .cube-face-photo {
-  width: 50%;
+  flex: 1 1 415px;
   background-size: cover;
   background-position: center;
 }
