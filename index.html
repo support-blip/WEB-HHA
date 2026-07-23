@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo/lettermark.png">
 <title>Hector Hernandez & Associates, P.A. | Abogados en Florida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +19,7 @@
 <header id="site-header">
   <div class="header-inner">
     <div class="header-logo">
-      <img src="LOGO.png" alt="Hector Hernandez & Associates, P.A." class="logo-full">
+      <img src="img/logo/horizontal-blanco.png" alt="Hector Hernandez & Associates, P.A." class="logo-full">
     </div>
     <nav class="header-menu">
       <a href="index.html" class="active">Inicio</a>
@@ -56,7 +57,7 @@
     <div id="hero" class="hero-content">
       <div class="hero-left">
         <div class="hero-hh" id="hero-hh">
-          <img src="compacto.png" alt="Hector Hernandez & Associates, P.A." class="logo-full">
+          <img src="img/logo/variable-compacto-bl.png" alt="Hector Hernandez & Associates, P.A." class="logo-full">
         </div>
       </div>
       <div class="hero-right">
@@ -174,29 +175,25 @@
   </div>
 </section>
 
-<!-- ============ NUESTRO EQUIPO (divider) ============ -->
-<section id="team" class="team-divider-section">
-  <div class="team-divider reveal-fade-up">
-    <span class="deco-line-h"></span>
-    <span class="team-divider-text"><span class="word-navy">NUESTRO</span> <span class="word-gold">EQUIPO</span></span>
-    <span class="deco-line-h"></span>
-  </div>
-</section>
+<!-- ============ TEAM DIRECTORY (2 columnas: destacado + grid) ============ -->
+<section id="team" class="team-directory-section">
+  <div class="team-layout">
 
-<!-- ============ TEAM DIRECTORY ============ -->
-<section id="team-directory" class="team-directory-section">
-  <div class="team-gallery" id="team-gallery">
-    <!-- populated by JS -->
-  </div>
-
-  <div class="team-profile-panel" id="team-profile-panel">
-    <button class="profile-close" id="profile-close" aria-label="Cerrar">×</button>
-    <div class="profile-photo" id="profile-photo"></div>
-    <div class="profile-info">
-      <h3 class="profile-name" id="profile-name">HECTOR HERNANDEZ</h3>
-      <p class="profile-role" id="profile-role">Abogado Fundador</p>
-      <div class="profile-deco-line"></div>
+    <!-- Columna izquierda (35%): persona destacada -->
+    <div class="team-feature">
+      <div class="team-feature-photo" id="team-feature-photo"></div>
+      <h3 class="team-feature-name" id="team-feature-name">HECTOR HERNANDEZ</h3>
+      <p class="team-feature-role" id="team-feature-role">Abogado Fundador</p>
     </div>
+
+    <!-- Columna derecha (65%): título + grid de fotos -->
+    <div class="team-directory-col">
+      <h2 class="team-directory-title"><span class="word-navy">NUESTRO</span> <span class="word-gold">EQUIPO</span></h2>
+      <div class="team-gallery" id="team-gallery">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -278,7 +275,7 @@
   <div class="footer-inner">
     <div class="footer-col footer-brand">
       <div class="footer-hh">
-        <span class="hh-h1">H</span><span class="hh-h2">H</span>
+        <img src="img/logo/variable-compacto-bl.png" alt="Hector Hernandez & Associates, P.A." class="footer-logo-img">
       </div>
       <p class="footer-tagline">Tu sueño americano es<br>nuestra misión legal.</p>
       <div class="footer-social">

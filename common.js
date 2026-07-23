@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    let revealed = false;
     function revealCurrentPage() {
+      if (revealed) return; // asegura que el telón se ejecute UNA sola vez
+      revealed = true;
       setCurtain('translateY(0)', false); // punto de partida: cubriendo, sin animar
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       window.addEventListener('load', revealCurrentPage);
     }
-    setTimeout(revealCurrentPage, 1600); // red de seguridad
+    setTimeout(revealCurrentPage, 1600); // red de seguridad (solo actúa si 'load' nunca disparó)
 
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');

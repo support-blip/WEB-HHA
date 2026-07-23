@@ -65,6 +65,33 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHero();
   }
 
+  /* ---------- SERVICES INTRO: EFECTO MÁQUINA DE ESCRIBIR ---------- */
+  const twTitle = document.querySelector('.services-intro-title');
+  if (twTitle) {
+    const fullText = twTitle.innerHTML.replace(/<br\s*\/?>/gi, '\n').trim();
+    twTitle.innerHTML = '<span class="tw-caret"></span>';
+    let typed = false;
+    function typeWriter() {
+      let i = 0;
+      const speed = 45;
+      (function step() {
+        const slice = fullText.slice(0, i);
+        twTitle.innerHTML = slice.replace(/\n/g, '<br>') + '<span class="tw-caret"></span>';
+        if (i < fullText.length) { i++; setTimeout(step, speed); }
+      })();
+    }
+    const twObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !typed) {
+          typed = true;
+          typeWriter();
+          twObserver.unobserve(twTitle);
+        }
+      });
+    }, { threshold: 0.4 });
+    twObserver.observe(twTitle);
+  }
+
   /* ---------- TEAM INTRO: ZOOM TEXT ---------- */
   const teamIntroWrapper = document.getElementById('team-intro-wrapper');
   const teamGiant = document.getElementById('team-giant');
@@ -102,84 +129,48 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const gallery = document.getElementById('team-gallery');
-  if (gallery) {
-    const profilePhoto = document.getElementById('profile-photo');
-    const profileName = document.getElementById('profile-name');
-    const profileRole = document.getElementById('profile-role');
-    const profilePanel = document.getElementById('team-profile-panel');
-    const profileClose = document.getElementById('profile-close');
+  const featurePhoto = document.getElementById('team-feature-photo');
+  const featureName = document.getElementById('team-feature-name');
+  const featureRole = document.getElementById('team-feature-role');
 
-    function initials(name) {
-      return name.split(' ').filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-    }
-
-    function photoStyle(member) {
-      if (member.photo) {
-        return `background:url('${member.photo}') center/cover no-repeat;`;
+  if (gallery && featurePhoto) {
+    // Aplica una persona a la columna izquierda destacada
+    function setFeature(member, animate) {
+      const apply = () => {
+        featurePhoto.style.background = `url('${member.photo}') center top / cover no-repeat`;
+        featureName.textContent = member.name.toUpperCase();
+        featureRole.textContent = member.role;
+        featurePhoto.style.opacity = '1';
+      };
+      if (animate) {
+        featurePhoto.style.opacity = '0';
+        setTimeout(apply, 120);
+      } else {
+        apply();
       }
-      return `background:linear-gradient(160deg, ${member.color}, #0a1220); display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.85);font-family:'Montserrat',sans-serif;font-weight:700;font-size:32px;`;
     }
 
-    teamMembers.forEach((member, idx) => {
+    // Construye las tarjetas pequeñas (solo foto)
+    teamMembers.forEach((member) => {
       const el = document.createElement('div');
       el.className = 'team-member';
-      if (idx === 0) el.classList.add('selected');
-      el.innerHTML = `
-        <div class="team-photo" style="${photoStyle(member)}">${member.photo ? '' : initials(member.name)}</div>
-        <div class="team-member-name">${member.name}</div>
-        <div class="team-member-role">${member.role}</div>
-      `;
-      el.addEventListener('click', () => selectMember(member, el));
+      el.innerHTML = `<div class="team-photo" style="background:url('${member.photo}') center/cover no-repeat;"></div>`;
+      el.addEventListener('mouseenter', () => {
+        gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('active'));
+        el.classList.add('active');
+        setFeature(member, true);
+      });
       gallery.appendChild(el);
     });
 
-    function applyProfilePhoto(member) {
-      if (member.photo) {
-        profilePhoto.style.background = `url('${member.photo}') center top / cover no-repeat`;
-        profilePhoto.textContent = '';
-      } else {
-        profilePhoto.style.background = `linear-gradient(160deg, ${member.color}, #0a1220)`;
-        profilePhoto.textContent = initials(member.name);
-      }
-      profilePhoto.style.display = 'flex';
-      profilePhoto.style.alignItems = 'center';
-      profilePhoto.style.justifyContent = 'center';
-      profilePhoto.style.color = 'rgba(255,255,255,0.9)';
-      profilePhoto.style.fontFamily = "'Montserrat', sans-serif";
-      profilePhoto.style.fontWeight = '800';
-      profilePhoto.style.fontSize = '64px';
-    }
+    // Al salir del grid, vuelve al fundador (estado por defecto)
+    gallery.addEventListener('mouseleave', () => {
+      gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('active'));
+      setFeature(teamMembers[0], true);
+    });
 
-    function selectMember(member, el) {
-      gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('selected'));
-      el.classList.add('selected');
-
-      profilePhoto.style.opacity = 0;
-      profileName.style.opacity = 0;
-      setTimeout(() => {
-        applyProfilePhoto(member);
-        profileName.textContent = member.name.toUpperCase();
-        profileRole.textContent = member.role;
-        profilePhoto.style.opacity = 1;
-        profileName.style.opacity = 1;
-      }, 200);
-    }
-
-    if (teamMembers.length) {
-      const first = teamMembers[0];
-      applyProfilePhoto(first);
-      profileName.textContent = first.name.toUpperCase();
-      profileRole.textContent = first.role;
-    }
-
-    if (profileClose) {
-      profileClose.addEventListener('click', () => {
-        const panel = document.getElementById('team-profile-panel');
-        panel.style.transition = 'opacity 0.3s ease';
-        panel.style.opacity = 0;
-        setTimeout(() => { panel.style.display = 'none'; }, 300);
-      });
-    }
+    // Estado inicial: fundador (Hector Hernandez)
+    setFeature(teamMembers[0], false);
   }
 
   /* ---------- VIDEO THUMB CLICK (visual only placeholder) ---------- */
