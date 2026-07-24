@@ -102,9 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const total = teamIntroWrapper.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       const scrolled = clamp01(-rect.top / total);
-      const scale = lerp(1, 5, scrolled);
-      // "TEAM" no se desvanece: llega a su tamaño final y queda fijo/visible,
-      // sin dejar un tramo de scroll con la sección vacía.
+      // Crece hasta la mitad del recorrido y vuelve a su tamaño inicial al
+      // terminar, para no dejar la sección vacía ni con "TEAM" sobrepuesto.
+      const scale = scrolled <= 0.5
+        ? lerp(1, 5, scrolled / 0.5)
+        : lerp(5, 1, (scrolled - 0.5) / 0.5);
       teamGiant.style.transform = `translateX(-50%) scale(${scale})`;
     }
     window.addEventListener('scroll', updateTeamIntro, { passive: true });
@@ -151,10 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Construye las tarjetas pequeñas (solo foto)
+    let founderEl = null;
     teamMembers.forEach((member, idx) => {
       const el = document.createElement('div');
       el.className = 'team-member';
-      if (idx === 0) el.classList.add('is-founder'); // Hector Hernandez: iluminado en azul por defecto
+      if (idx === 0) { el.classList.add('active'); founderEl = el; } // Hector Hernandez: color por defecto
       el.innerHTML = `<div class="team-photo" style="background:url('${member.photo}') center/cover no-repeat;"></div>`;
       el.addEventListener('mouseenter', () => {
         gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('active'));
@@ -167,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Al salir del grid, vuelve al fundador (estado por defecto)
     gallery.addEventListener('mouseleave', () => {
       gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('active'));
+      if (founderEl) founderEl.classList.add('active');
       setFeature(teamMembers[0], true);
     });
 
