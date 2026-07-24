@@ -103,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (total <= 0) return;
       const scrolled = clamp01(-rect.top / total);
       const scale = lerp(1, 5, scrolled);
-      const opacity = scrolled > 0.85 ? lerp(1, 0, (scrolled - 0.85) / 0.15) : 1;
+      // "TEAM" no se desvanece: llega a su tamaño final y queda fijo/visible,
+      // sin dejar un tramo de scroll con la sección vacía.
       teamGiant.style.transform = `translateX(-50%) scale(${scale})`;
-      teamGiant.style.opacity = opacity;
     }
     window.addEventListener('scroll', updateTeamIntro, { passive: true });
     window.addEventListener('resize', updateTeamIntro);
@@ -151,9 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Construye las tarjetas pequeñas (solo foto)
-    teamMembers.forEach((member) => {
+    teamMembers.forEach((member, idx) => {
       const el = document.createElement('div');
       el.className = 'team-member';
+      if (idx === 0) el.classList.add('is-founder'); // Hector Hernandez: iluminado en azul por defecto
       el.innerHTML = `<div class="team-photo" style="background:url('${member.photo}') center/cover no-repeat;"></div>`;
       el.addEventListener('mouseenter', () => {
         gallery.querySelectorAll('.team-member').forEach(m => m.classList.remove('active'));
